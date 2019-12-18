@@ -1,12 +1,15 @@
-// 'use strict';
-// module.exports = (sequelize, DataTypes) => {
-//   const artist = sequelize.define('artist', {
-//     artistName: DataTypes.STRING,
-//     artistGroup: DataTypes.STRING,
-//     artist_ID: DataTypes.INTEGER
-//   }, {});
-//   artist.associate = function(models) {
-//     // associations can be defined here
-//   };
-//   return artist;
-// };
+const models = require('./models');
+const readline = require('readline').createInterface({
+  input: process.stdin,
+  output: process.stdout
+})
+
+readline.question(`what's artist name?`, (name) => {
+  console.log(`name name is: ${name}`);
+
+  models.artist.create({name: name})
+    .then(function (artist) {
+      console.log(artist);
+    });
+  readline.close();
+});
